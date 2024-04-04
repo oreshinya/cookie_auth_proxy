@@ -1,0 +1,6 @@
+Makefile
+Dockerfile
+.env.local
+.env.local.bk
+.dockerignore
+.gitignore

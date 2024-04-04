@@ -1,0 +1,36 @@
+worker_processes 1;
+
+events {
+  worker_connections 10240;
+  multi_accept on;
+}
+
+http {
+  include mime.types;
+  default_type application/octet-stream;
+
+  access_log off;
+  server_tokens off;
+  log_not_found off;
+
+  server {
+    listen 8100;
+
+    location = /.auth {
+      if ($http_authorization = "Basic ${BASIC_SECRET}") {
+        add_header Set-Cookie "p_session_key=${COOKIE_SECRET}; Path=/; Max-Age=31536000; SameSite=Lax; Secure; HttpOnly";
+        return 302 /;
+      }
+      auth_basic "Authentication Required";
+      auth_basic_user_file /dev/null;
+    }
+
+    if ($cookie_p_session_key != "${COOKIE_SECRET}") {
+      rewrite ^ /.auth break;
+    }
+
+    location / {
+      proxy_pass ${BACKEND_URL};
+    }
+  }
+}
