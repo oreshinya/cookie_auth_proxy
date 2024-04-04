@@ -8,3 +8,7 @@ build:
 .PHONY: up
 up:
 	docker run --env-file .env.local -p 8100:8100 ${IMAGE}:${VERSION}
+
+.PHONY: push
+push:
+	docker push ${IMAGE}:${VERSION}
