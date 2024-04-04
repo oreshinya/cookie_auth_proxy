@@ -1,9 +1,9 @@
 IMAGE=oreshinya/cookie_auth_proxy
-VERSION=1.0.0
+VERSION=1.0.1
 
 .PHONY: build
 build:
-	docker build -t ${IMAGE}:${VERSION} .
+	docker build -t ${IMAGE}:${VERSION} . --platform linux/amd64
 
 .PHONY: up
 up:
