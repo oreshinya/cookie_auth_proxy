@@ -12,6 +12,7 @@ http {
   access_log off;
   server_tokens off;
   log_not_found off;
+  absolute_redirect off;
 
   server {
     listen 8100;

@@ -1,5 +1,5 @@
 IMAGE=oreshinya/cookie_auth_proxy
-VERSION=1.0.1
+VERSION=1.0.2
 
 .PHONY: build
 build:
